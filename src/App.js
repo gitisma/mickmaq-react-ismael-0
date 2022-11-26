@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
+import './styles/styles.scss'
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import ProviderArticle from './Contexts/ProviderArtcles';
+// import Home from './Pages/Home';
+
+const Home = React.lazy(()=> import('./Pages/Home'))
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <ContextUser> */}
+      <ProviderArticle>
+        <BrowserRouter>
+        
+          <Routes>
+            <Route exact path="/login" name="login-page" element={<Login/>}/>
+            <Route exact path="/register" name="register-page" element={<Register/>}/>
+            {/* <Route exact path="/articles" name="register-page" element={<ShowArticles/>}/> */}
+            <Route path="*" name="Home" element={<Home/>}/>
+          </Routes>
+        </BrowserRouter>
+        </ProviderArticle>
+        {/* </ContextUser> */}
+        
     </div>
   );
 }
